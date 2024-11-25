@@ -6,8 +6,23 @@ using Object = UnityEngine.Object;
 
 public static class ObsidityMain
 {
+    private const string IsInitializedKey = "IsInitialized";
+
+    public static bool IsInitialized()
+    {
+        return PlayerPrefs.GetInt(IsInitializedKey, 0) == 1;
+    }
+
     public static void CreateVault(string vaultName, string vaultLocation)
     {
+        Debug.Log("TEST");
+        return;
+        if (IsInitialized())
+        {
+            ObsidityLogger.LogErr("ObsidityMain.CreateVault() Already Initialized");
+            return;
+        }
+
         try
         {
             var fullPath = Path.Combine(vaultLocation, vaultName);
@@ -20,16 +35,25 @@ public static class ObsidityMain
                 var readmeContent = $"New vault: {vaultName}\n";
                 File.WriteAllText(Path.Combine(fullPath, "README.md"), readmeContent);
                 ObsidityLogger.Log($"Vault '{vaultName}' created successfully!");
+                SetIsInitialized(true);
             }
             else
             {
+                SetIsInitialized(true);
                 ObsidityLogger.LogWrn("Directory already exists, please choose another directory");
             }
         }
         catch (Exception e)
         {
+            SetIsInitialized(false);
             ObsidityLogger.LogErr($"An error occured: {e}");
         }
+    }
+
+    private static void SetIsInitialized(bool isInitialized)
+    {
+        PlayerPrefs.SetInt(IsInitializedKey, isInitialized ? 1 : 0);
+        PlayerPrefs.Save();
     }
 }
 

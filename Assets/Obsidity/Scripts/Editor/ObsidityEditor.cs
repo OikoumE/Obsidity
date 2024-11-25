@@ -19,8 +19,8 @@ namespace Editor
         public void OnGUI()
         {
             GUILayout.Label("Obsidity Editor", EditorStyles.boldLabel);
-            _textTitle = DrawTextField("Title:", _textTitle);
-            _textTags = DrawTextField("Tags:", _textTags);
+            _textTitle = ObsidityEditorHelper.DrawTextField("Title:", _textTitle);
+            _textTags = ObsidityEditorHelper.DrawTextField("Tags:", _textTags);
             GUILayout.Label("Date:" + DateTime.Now.ToString("dd/MM/yy HH:mm"));
 
             GUILayout.Label("Text Area:");
@@ -29,36 +29,21 @@ namespace Editor
             if (GUILayout.Button("Save")) SaveAndResetForm();
             if (GUILayout.Button("Clear")) ResetInputForm();
             GUILayout.EndHorizontal();
-            ShowWarning();
+            ShowWarnings();
             return;
 
-            void ShowWarning()
+            void ShowWarnings()
             {
-                var warningStyle = new GUIStyle(GUI.skin.label);
-                warningStyle.normal.textColor = Color.red;
-                warningStyle.fontStyle = FontStyle.Bold;
-
                 if (_showEmptyError)
-                    GUILayout.Label(_emptyError, warningStyle);
+                    ObsidityEditorHelper.ShowWarning(_emptyError, ObsidityEditorHelper.WarningStyle);
                 if (_showSaveError)
-                    GUILayout.Label(_saveError, warningStyle);
+                    ObsidityEditorHelper.ShowWarning(_saveError, ObsidityEditorHelper.WarningStyle);
             }
-
-
             // serializedObject.Update();
             // EditorUtility.SetDirty(_target);
             // serializedObject.ApplyModifiedProperties();
         }
 
-        private string DrawTextField(string label, string textContent)
-        {
-            GUILayout.BeginHorizontal();
-            GUILayout.Label(label, GUILayout.Width(EditorGUIUtility.currentViewWidth * 0.25f));
-            textContent =
-                EditorGUILayout.TextField(textContent, GUILayout.Width(EditorGUIUtility.currentViewWidth * 0.75f));
-            GUILayout.EndHorizontal();
-            return textContent;
-        }
 
         [MenuItem("Window/Obsidity/Obsidity Editor")]
         public static void ShowWindow()
@@ -80,8 +65,10 @@ namespace Editor
 
         private void SaveAsMd()
         {
-            if (_saveSuccess)
+            if (!_saveSuccess)
                 _showSaveError = true;
+            var dt = DateTime.Now.ToString("dd/MM/yy HH:mm");
+            var data = new ObsidityData(_textContent, dt, _textTags, _textTitle);
         }
 
         public void ResetInputForm()
@@ -92,6 +79,42 @@ namespace Editor
             _showEmptyError = false;
             GUI.FocusControl(null);
             Repaint();
+        }
+    }
+
+    public static class ObsidityEditorHelper
+    {
+        public static GUIStyle WarningStyle = new(GUI.skin.label)
+        {
+            normal =
+            {
+                textColor = Color.yellow
+            },
+            fontStyle = FontStyle.Bold
+        };
+
+        public static GUIStyle ErrorStyle = new(GUI.skin.label)
+        {
+            normal =
+            {
+                textColor = Color.red
+            },
+            fontStyle = FontStyle.Bold
+        };
+
+        public static string DrawTextField(string label, string textContent)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(label, GUILayout.Width(EditorGUIUtility.currentViewWidth * 0.25f));
+            textContent =
+                EditorGUILayout.TextField(textContent, GUILayout.Width(EditorGUIUtility.currentViewWidth * 0.75f));
+            GUILayout.EndHorizontal();
+            return textContent;
+        }
+
+        public static void ShowWarning(string label, GUIStyle style)
+        {
+            GUILayout.Label(label, style);
         }
     }
 }

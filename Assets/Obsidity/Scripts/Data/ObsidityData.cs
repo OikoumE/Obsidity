@@ -24,7 +24,7 @@ public class ObsidityData
 
 public static class ObsidityStrings
 {
-    public static readonly string DefaultPath = "Assets/Obsidity/Vault/";
+    public static readonly string DefaultPath = "/Obsidity/Vault";
 
     public static readonly string FindObsidityWindow =
         "You can always find the editor in the menu: 'Window/Obsidity/Obsidity Editor' Or click the button below";
@@ -36,7 +36,7 @@ public static class ObsidityStrings
     public static readonly string NotInitializedError =
         "Please initialize the vault via 'Window/Obsidity/Obsidity Welcome' first";
 
-    public static readonly string SaveError = "lol couldnt save";
+    public static readonly string SaveError = "Error when saving, check console output.";
+    public static readonly string SaveSuccess = "Successfully saved file: ";
     public static readonly string SelectVaultName = "Please select a vault name";
-    public static readonly string SelectVaultPath = "Please select a vault name, default is: Assets/Obsidity/Vault/";
 }

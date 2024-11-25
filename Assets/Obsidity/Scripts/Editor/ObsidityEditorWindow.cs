@@ -7,9 +7,12 @@ namespace Editor
 {
     public class ObsidityEditorWindow : EditorWindow
     {
+        private const float SuccessDisplayTime = 5.0f;
+        private static float _timer;
+
         public void OnGUI()
         {
-            ShowWarnings();
+            ShowInformation();
             using (new EditorGUI.DisabledScope(!ObsidityMain.IsInitialized()))
             {
                 GUILayout.Label("Obsidity Editor", EditorStyles.boldLabel);
@@ -21,27 +24,70 @@ namespace Editor
                 _textContent =
                     EditorGUILayout.TextArea(_textContent, GUILayout.Height(50), GUILayout.ExpandHeight(true));
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button("Save")) SaveAndResetForm();
-                if (GUILayout.Button("Clear")) ResetInputForm();
+                if (GUILayout.Button("Save"))
+                    SaveAndResetForm();
+                if (GUILayout.Button("Clear"))
+                    ResetInputForm();
                 GUILayout.EndHorizontal();
             }
 
             return;
 
-            void ShowWarnings()
+            void ShowInformation()
             {
+                var anyConditionTrue = false;
                 if (!ObsidityMain.IsInitialized())
+                {
+                    anyConditionTrue = true;
                     EditorGUILayout.HelpBox(ObsidityStrings.NotInitializedError, MessageType.Error);
+                }
+
                 if (_showEmptyError)
+                {
+                    anyConditionTrue = true;
                     EditorGUILayout.HelpBox(ObsidityStrings.EmptyError, MessageType.Warning);
+                }
+
                 if (_showSaveError)
+                {
+                    anyConditionTrue = true;
                     EditorGUILayout.HelpBox(ObsidityStrings.SaveError, MessageType.Warning);
+                }
+
+                if (_showSaveSuccess)
+                {
+                    anyConditionTrue = true;
+                    var vaultName = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.VaultName);
+                    var index = ObsidityPlayerPrefs.GetInt(ObsidityPlayerPrefsKeys.FileNameIndex);
+                    EditorGUILayout.HelpBox(ObsidityStrings.SaveSuccess + $"{vaultName}_{index:D5}.md",
+                        MessageType.Info);
+                }
+
+                if (anyConditionTrue)
+                    RemoveHelpBoxTimer();
             }
-            // serializedObject.Update();
-            // EditorUtility.SetDirty(_target);
-            // serializedObject.ApplyModifiedProperties();
         }
 
+        private static void RemoveHelpBoxTimer()
+        {
+            _timer = SuccessDisplayTime;
+            EditorApplication.update += UpdateTimer;
+        }
+
+        private static void UpdateTimer()
+        {
+            if (_timer > 0)
+            {
+                _timer -= (float)EditorApplication.timeSinceStartup - _timer;
+            }
+            else
+            {
+                _showEmptyError = false;
+                _showSaveError = false;
+                _showSaveSuccess = false;
+                EditorApplication.update -= UpdateTimer;
+            }
+        }
 
         [MenuItem("Window/Obsidity/Obsidity Editor")]
         public static void ShowWindow()
@@ -57,18 +103,15 @@ namespace Editor
                 return;
             }
 
-            SaveAsMd();
+
+            var dt = DateTime.Now.ToString("yyyy-MM-dd");
+            var data = new ObsidityData(_textContent, dt, _textTags, _textTitle);
+            _showSaveError = !ObsidityMain.SaveMarkdownFile(data);
+            if (!_showSaveError)
+                _showSaveSuccess = true;
             ResetInputForm();
         }
 
-        private void SaveAsMd()
-        {
-            if (!_saveSuccess)
-                _showSaveError = true;
-            var dt = DateTime.Now.ToString("dd/MM/yy HH:mm");
-            var data = new ObsidityData(_textContent, dt, _textTags, _textTitle);
-            //TODO save
-        }
 
         public void ResetInputForm()
         {
@@ -76,13 +119,16 @@ namespace Editor
             _textTags = "";
             _textTitle = "";
             _showEmptyError = false;
+            _showSaveError = false;
+
             GUI.FocusControl(null);
             Repaint();
         }
 #pragma warning disable CS0414
-        private readonly bool _saveSuccess = false;
-        private bool _showEmptyError;
-        private bool _showSaveError;
+        private bool _saveSuccess;
+        private static bool _showEmptyError;
+        private static bool _showSaveError;
+        private static bool _showSaveSuccess;
         private string _textContent = "";
         private string _textDate = "";
         private string _textTags = "";

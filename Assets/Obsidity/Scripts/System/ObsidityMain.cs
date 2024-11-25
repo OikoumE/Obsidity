@@ -13,13 +13,10 @@ public static class ObsidityMain
             var vaultName = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.VaultName);
             var vaultFullPath = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.FullPath);
             var index = ObsidityPlayerPrefs.GetInt(ObsidityPlayerPrefsKeys.FileNameIndex);
-            Debug.Log(vaultFullPath);
-
             var newIndex = index + 1;
             var fileName = $"{vaultName}_{newIndex:D5}.md";
             ObsidityPlayerPrefs.SaveIntKey(ObsidityPlayerPrefsKeys.FileNameIndex, newIndex);
             var fullFileNamePath = Path.Combine(vaultFullPath, fileName).Replace("\\", "/");
-            Debug.Log(fullFileNamePath);
             var stringData =
                 "# Title:" + data.textTitle +
                 "\n ---" +
@@ -35,7 +32,7 @@ public static class ObsidityMain
         }
         catch (Exception e)
         {
-            ObsidityLogger.LogErr("Error encountered when creating file: " + e);
+            ObsidityLogger.LogErr("Error encountered when saving file: " + e);
             return false;
         }
     }
@@ -98,11 +95,6 @@ public static class ObsidityMain
 
         try
         {
-            // if (!AssetDatabase.IsValidFolder($"Assets/Obsidity/{vaultName}"))
-            //     pathGuid = AssetDatabase.CreateFolder("Assets/Obsidity", vaultName);
-            //
-            //
-
             var vaultPath = Path.Combine(Application.dataPath, "Obsidity", vaultName).Replace("\\", "/");
             FolderCreator.CreateHiddenFolder(vaultName);
             var readmeContent = $"New vault: {vaultName}\n";
@@ -111,6 +103,7 @@ public static class ObsidityMain
             SetIsInitialized(true, vaultName, vaultPath);
 #if UNTIY_EDITOR
             ObsidityEditorWindow.ShowWindow();
+            AssetDatabase.Refresh();
 #endif
         }
         catch (Exception e)

@@ -18,11 +18,11 @@ public static class FolderCreator
         if (!Directory.Exists(fullPath))
         {
             Directory.CreateDirectory(fullPath);
-            Debug.Log($"Folder created at: {fullPath}");
+            ObsidityLogger.Log($"Folder created at: {fullPath}");
         }
         else
         {
-            Debug.LogWarning($"Folder already exists at: {fullPath}");
+            ObsidityLogger.LogWrn($"Folder already exists at: {fullPath}");
         }
 #if UNITY_EDITOR
         // Refresh the AssetDatabase to ensure the new folder appears in the Project window

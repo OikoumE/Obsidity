@@ -29,6 +29,10 @@ namespace Obsidity.Scripts.Editor
             {
                 if (GUILayout.Button("Initialize Vault"))
                     ObsidityMain.CreateVault(_vaultName);
+#if UNITY_EDITOR
+                // Refresh the AssetDatabase to ensure the new folder appears in the Project window
+                AssetDatabase.Refresh();
+#endif
             }
 
             if (GUILayout.Button("Reset to Defaults"))

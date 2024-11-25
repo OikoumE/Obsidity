@@ -8,7 +8,7 @@ namespace Editor
     public class ObsidityEditorWindow : EditorWindow
     {
         private const float SuccessDisplayTime = 5.0f;
-        private static float _timer;
+        private static double _startTime;
 
         public void OnGUI()
         {
@@ -70,17 +70,15 @@ namespace Editor
 
         private static void RemoveHelpBoxTimer()
         {
-            _timer = SuccessDisplayTime;
+            _startTime = EditorApplication.timeSinceStartup;
             EditorApplication.update += UpdateTimer;
         }
 
+
         private static void UpdateTimer()
         {
-            if (_timer > 0)
-            {
-                _timer -= (float)EditorApplication.timeSinceStartup - _timer;
-            }
-            else
+            var elapsed = EditorApplication.timeSinceStartup - _startTime;
+            if (elapsed >= SuccessDisplayTime)
             {
                 _showEmptyError = false;
                 _showSaveError = false;
@@ -106,10 +104,12 @@ namespace Editor
 
             var dt = DateTime.Now.ToString("yyyy-MM-dd");
             var data = new ObsidityData(_textContent, dt, _textTags, _textTitle);
-            _showSaveError = !ObsidityMain.SaveMarkdownFile(data);
-            if (!_showSaveError)
+            var success = ObsidityMain.SaveMarkdownFile(data);
+            if (!success)
+                _showSaveError = true;
+            else
                 _showSaveSuccess = true;
-            ResetInputForm();
+            Repaint();
         }
 
 
@@ -120,6 +120,7 @@ namespace Editor
             _textTitle = "";
             _showEmptyError = false;
             _showSaveError = false;
+            _showSaveSuccess = false;
 
             GUI.FocusControl(null);
             Repaint();

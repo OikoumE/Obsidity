@@ -20,8 +20,23 @@ public class ObsidityData
         this.textTags = textTags;
         this.textTitle = textTitle;
     }
+}
 
-    private void SerializeDataToFile()
-    {
-    }
+public static class ObsidityStrings
+{
+    public static readonly string DefaultPath = "Assets/Obsidity/Vault/";
+
+    public static readonly string FindObsidityWindow =
+        "You can always find the editor in the menu: 'Window/Obsidity/Obsidity Editor' Or click the button below";
+
+    public static readonly string CheckForVault = "If you believe this is wrong you can 'Check for Obsidity vault'";
+    public static readonly string AlreadyInitialized = "Obsidity is already initialized at:\n";
+    public static readonly string EmptyError = "Please fill out all the fields.";
+
+    public static readonly string NotInitializedError =
+        "Please initialize the vault via 'Window/Obsidity/Obsidity Welcome' first";
+
+    public static readonly string SaveError = "lol couldnt save";
+    public static readonly string SelectVaultName = "Please select a vault name";
+    public static readonly string SelectVaultPath = "Please select a vault name, default is: Assets/Obsidity/Vault/";
 }

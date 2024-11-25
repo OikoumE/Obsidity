@@ -1,5 +1,4 @@
 ﻿using UnityEditor;
-using UnityEngine;
 
 namespace Obsidity.Scripts.Editor
 {
@@ -9,9 +8,9 @@ namespace Obsidity.Scripts.Editor
             string[] movedAssets, string[] movedFromAssetPaths)
         {
             foreach (var asset in importedAssets)
-                if (asset.EndsWith(".cs") && asset.Contains("YourPackageName"))
+                if (asset.EndsWith(".cs") && asset.Contains("Obsidity"))
                 {
-                    Debug.Log("Obsidity package imported. Running initialization script...");
+                    ObsidityLogger.Log("Obsidity package imported. Running initialization script...");
                     RunInitializationScript();
                     break;
                 }

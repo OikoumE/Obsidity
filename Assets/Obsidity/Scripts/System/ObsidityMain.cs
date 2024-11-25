@@ -18,11 +18,12 @@ public static class ObsidityMain
             ObsidityPlayerPrefs.SaveIntKey(ObsidityPlayerPrefsKeys.FileNameIndex, newIndex);
             var fullFileNamePath = Path.Combine(vaultFullPath, fileName).Replace("\\", "/");
             var stringData =
-                "# Title:" + data.textTitle +
                 "\n ---" +
-                "\n tags:" + IterateTags(data) +
-                "\n Created: " + data.textDate +
-                "\n ---\n" + data.textContent;
+                $"\n tags: {IterateTags(data)}" +
+                $"\n Created: {data.textDate}" +
+                "\n ---" +
+                $"\n# {data.textTitle}" +
+                $"\n{data.textContent}";
 
             File.WriteAllText(fullFileNamePath, stringData);
 #if UNITY_EDITOR
@@ -39,7 +40,7 @@ public static class ObsidityMain
 
     private static string IterateTags(ObsidityData data)
     {
-        return data.textTags.Split(",").Aggregate("", (current, tag) => current + $"\n - {tag}");
+        return data.textTags.Split(" ").Aggregate("", (current, tag) => current + $"\n - {tag}");
     }
 
     public static bool IsInitialized()

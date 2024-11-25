@@ -16,10 +16,13 @@ namespace Editor
             using (new EditorGUI.DisabledScope(!ObsidityMain.IsInitialized()))
             {
                 GUILayout.Label("Obsidity Editor", EditorStyles.boldLabel);
-                _textTitle = ObsidityEditorHelper.DrawTextField("Title:", _textTitle);
-                _textTags = ObsidityEditorHelper.DrawTextField("Tags:", _textTags);
-                GUILayout.Label("Date:" + DateTime.Now.ToString("dd/MM/yy HH:mm"));
 
+                var tContent = new GUIContent("Title: ", "This is the title at the top of your note.");
+                var tagsContent = new GUIContent("Tags: ", "Space separated list of tags.");
+
+                _textTitle = ObsidityEditorHelper.DrawTextField(tContent, _textTitle);
+                _textTags = ObsidityEditorHelper.DrawTextField(tagsContent, _textTags);
+                GUILayout.Label("Date:" + DateTime.Now.ToString("yyyy-MM-dd "));
                 GUILayout.Label("Text Area:");
                 _textContent =
                     EditorGUILayout.TextArea(_textContent, GUILayout.Height(50), GUILayout.ExpandHeight(true));
@@ -106,9 +109,15 @@ namespace Editor
             var data = new ObsidityData(_textContent, dt, _textTags, _textTitle);
             var success = ObsidityMain.SaveMarkdownFile(data);
             if (!success)
+            {
                 _showSaveError = true;
+            }
             else
+            {
                 _showSaveSuccess = true;
+                ResetInputForm();
+            }
+
             Repaint();
         }
 
@@ -118,10 +127,6 @@ namespace Editor
             _textContent = "";
             _textTags = "";
             _textTitle = "";
-            _showEmptyError = false;
-            _showSaveError = false;
-            _showSaveSuccess = false;
-
             GUI.FocusControl(null);
             Repaint();
         }

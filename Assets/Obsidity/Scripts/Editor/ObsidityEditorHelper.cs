@@ -32,5 +32,15 @@ namespace Obsidity.Scripts.Editor
             GUILayout.EndHorizontal();
             return textContent;
         }
+
+        public static string DrawTextField(GUIContent label, string textContent)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(label, GUILayout.Width(EditorGUIUtility.currentViewWidth * 0.25f));
+            textContent =
+                EditorGUILayout.TextField(textContent, GUILayout.Width(EditorGUIUtility.currentViewWidth * 0.75f));
+            GUILayout.EndHorizontal();
+            return textContent;
+        }
     }
 }

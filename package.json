@@ -4,5 +4,6 @@
   "displayName": "Obsidity",
   "description": "Obsidity",
   "unity": "6000.0",
-  "dependencies": {}
+  "dependencies": {},
+  "hideInEditor": true
 }

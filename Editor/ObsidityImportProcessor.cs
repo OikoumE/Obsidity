@@ -27,17 +27,8 @@ namespace Editor
                     ObsidityLogger.Log("Obsidity package already initialized.");
                 }
             }
-            else
-            {
-                HandleObsidityDeletion();
-            }
         }
 
-        private static void HandleObsidityDeletion()
-        {
-            ObsidityLogger.LogErr("Obsidity package not imported");
-            ObsidityPlayerPrefs.DeleteObsidityPlayerPrefs();
-        }
 
         private static bool FoundObsidity(string[] assets)
         {

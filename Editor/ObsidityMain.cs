@@ -18,12 +18,7 @@ public static class ObsidityMain
             ObsidityPlayerPrefs.SaveIntKey(ObsidityPlayerPrefsKeys.FileNameIndex, newIndex);
             var fullFileNamePath = Path.Combine(vaultFullPath, fileName).Replace("\\", "/");
             var stringData =
-                "---\n" +
-                $"tags: {IterateTags(data)}\n +
-                $"Created: {data.textDate}\n" +
-                "---\n" +
-                $"# {data.textTitle}\n" +
-                $"{data.textContent}\n";
+                $"---\ntags: {IterateTags(data)}\nCreated: {data.textDate}\n---\n# {data.textTitle}\n{data.textContent}\n";
 
             File.WriteAllText(fullFileNamePath, stringData);
 #if UNITY_EDITOR

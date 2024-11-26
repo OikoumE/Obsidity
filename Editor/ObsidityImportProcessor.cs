@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Linq;
+using UnityEditor;
 
 namespace Editor
 {
@@ -9,27 +10,41 @@ namespace Editor
         {
             var foundObsidity = false;
             // checks if Obsidity is added, moved or removed, and triggers initialization 
-            foreach (var asset in importedAssets)
-                if (asset.EndsWith(".cs") && asset.Contains("Obsidity"))
-                {
-                    if (!ObsidityMain.IsInitialized())
-                    {
-                        ObsidityLogger.Log("Obsidity package imported. Running initialization script...");
-                        RunInitializationScript();
-                    }
-                    else
-                    {
-                        ObsidityLogger.Log("Obsidity package already initialized.");
-                    }
-
-                    foundObsidity = true;
-                    break;
-                }
-
-            if (foundObsidity) return;
-            ObsidityLogger.LogErr("Obsidity package not imported");
-            ObsidityPlayerPrefs.DeleteObsidityPlayerPrefs();
+            HandleObsidityImport(importedAssets);
+            HandleObsidityDeletion(deletedAssets);
         }
+
+
+        private static void HandleObsidityImport(string[] assets)
+        {
+            if (FoundObsidity(assets))
+            {
+                if (!ObsidityMain.IsInitialized())
+                {
+                    ObsidityLogger.Log("Obsidity package imported. Running initialization script...");
+                    RunInitializationScript();
+                }
+                else
+                {
+                    ObsidityLogger.Log("Obsidity package already initialized.");
+                }
+            }
+        }
+
+        private static void HandleObsidityDeletion(string[] assets)
+        {
+            if (FoundObsidity(assets))
+            {
+                ObsidityLogger.LogErr("Obsidity package not imported");
+                ObsidityPlayerPrefs.DeleteObsidityPlayerPrefs();
+            }
+        }
+
+        private static bool FoundObsidity(string[] assets)
+        {
+            return assets.Any(asset => asset.EndsWith(".cs") && asset.Contains("Obsidity"));
+        }
+
 
         private static void RunInitializationScript()
         {

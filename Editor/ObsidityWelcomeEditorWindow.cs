@@ -17,10 +17,11 @@ namespace Obsidity.Scripts.Editor
             else
                 VaultIsInitialized();
         }
-/// <summary>
-/// displayed in editor if vault is not initialized
-/// </summary>
-/// <returns></returns>
+
+        /// <summary>
+        ///     displayed in editor if vault is not initialized
+        /// </summary>
+        /// <returns></returns>
         private void InitializeVault()
         {
             GUILayout.Label("Please initialize the Obsidian Vault.");
@@ -33,13 +34,13 @@ namespace Obsidity.Scripts.Editor
             {
                 // create new vault
                 if (GUILayout.Button("Initialize Vault"))
+                {
                     ObsidityMain.CreateVault(_vaultName);
-#if UNITY_EDITOR
-                // Refresh the AssetDatabase to ensure the new folder appears in the Project window
-                AssetDatabase.Refresh();
-                // open obsidity editor
-                ObsidityEditorWindow.ShowWindow();
-#endif
+                    // Refresh the AssetDatabase to ensure the new folder appears in the Project window
+                    AssetDatabase.Refresh();
+                    // open obsidity editor
+                    ObsidityEditorWindow.ShowWindow();
+                }
             }
 
             if (GUILayout.Button("Reset to Defaults"))
@@ -51,10 +52,11 @@ namespace Obsidity.Scripts.Editor
             GUI.FocusControl(null);
             _vaultName = "";
         }
-/// <summary>
-/// displayed in editor if vault is initialized
-/// </summary>
-/// <returns></returns>
+
+        /// <summary>
+        ///     displayed in editor if vault is initialized
+        /// </summary>
+        /// <returns></returns>
         private void VaultIsInitialized()
         {
             var fullPath = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.FullPath);

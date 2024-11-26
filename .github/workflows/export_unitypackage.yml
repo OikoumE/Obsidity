@@ -32,7 +32,7 @@ jobs:
           unity-editor -batchmode -nographics -quit -projectPath $PROJECT_PATH -exportPackage "Assets/Obsidity" "$EXPORT_PATH/Obsidity.unitypackage"
 
       - name: Upload Unity Package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: UnityPackage
           path: $EXPORT_PATH/Obsidity.unitypackage

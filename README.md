@@ -7,8 +7,8 @@ A tiny plugin that docks right in UnityEditor that allows you to take notes easi
 2. open unity package manager
 3. click "add from github"
 4. paste URL
-![image](https://github.com/user-attachments/assets/813eda99-27b5-43ee-b4d3-679a3076e993)
-<img src="https://github.com/user-attachments/assets/813eda99-27b5-43ee-b4d3-679a3076e993" alt="image" width="300" />
+
+<img src="https://github.com/user-attachments/assets/813eda99-27b5-43ee-b4d3-679a3076e993" alt="image" width="200" />
 
 Initialize a Vault by going to 'Window>Obsidity>Obsidity Intro' and follow the instructions provided.
 After initializing a Vault, you are set to go.
@@ -28,8 +28,7 @@ none :D
 OpenSauce
 ---
 
-![image](https://github.com/user-attachments/assets/9e8eeb9f-798b-402f-afb8-b3c088f3dfef)
-![1image](https://github.com/user-attachments/assets/2692f86b-b0ce-4e1e-a934-80f544449091)
+<img src="https://github.com/user-attachments/assets/9e8eeb9f-798b-402f-afb8-b3c088f3dfef" alt="image" width="200" /><img src="https://github.com/user-attachments/assets/2692f86b-b0ce-4e1e-a934-80f544449091" alt="image" width="200" />
 
 ---
 

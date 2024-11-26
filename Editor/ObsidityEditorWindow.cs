@@ -46,17 +46,17 @@ namespace Editor
             void SaveClearButtons()
             {
                 GUILayout.BeginHorizontal();
-
-                var canSave = _textTitle.Length > 0 &&
-                              _textTags.Length > 0 &&
-                              _textContent.Length > 0;
-                using (new EditorGUI.DisabledScope(canSave))
+                // quick inversion lol
+                var cantSave = _textTitle.Length == 0 &&
+                               _textTags.Length == 0 &&
+                               _textContent.Length == 0;
+                using (new EditorGUI.DisabledScope(!cantSave))
                 {
                     if (GUILayout.Button("Save"))
                         SaveAndResetForm();
                 }
 
-                using (new EditorGUI.DisabledScope(!canSave))
+                using (new EditorGUI.DisabledScope(cantSave))
                 {
                     if (GUILayout.Button("Clear"))
                         ResetInputForm();

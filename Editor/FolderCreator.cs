@@ -4,29 +4,40 @@ using UnityEngine;
 
 public static class FolderCreator
 {
-    public static void CreateHiddenFolder(string vaultName)
+    private static void CreateFolder(string absoluteFolderPath)
     {
-        // Combine paths to get the full path
-        var fullPath = Path.Combine(Application.dataPath, "Obsidity", vaultName, ".obsidian").Replace("\\", "/");
-
         // Ensure the parent directory exists
-        var parentDirectory = Path.GetDirectoryName(fullPath);
+        var parentDirectory = Path.GetDirectoryName(absoluteFolderPath);
         if (!Directory.Exists(parentDirectory))
             Directory.CreateDirectory(parentDirectory);
 
-        // Create the hidden folder
-        if (!Directory.Exists(fullPath))
+        // Create the folder
+        if (!Directory.Exists(absoluteFolderPath))
         {
-            Directory.CreateDirectory(fullPath);
-            ObsidityLogger.Log($"Folder created at: {fullPath}");
+            Directory.CreateDirectory(absoluteFolderPath);
+            ObsidityLogger.Log($"Folder created at: {absoluteFolderPath}");
         }
         else
         {
-            ObsidityLogger.LogWrn($"Folder already exists at: {fullPath}");
+            ObsidityLogger.LogWrn($"Folder already exists at: {absoluteFolderPath}");
         }
 #if UNITY_EDITOR
         // Refresh the AssetDatabase to ensure the new folder appears in the Project window
         AssetDatabase.Refresh();
 #endif
+    }
+
+    public static void CreateVaultFolders(string vaultName)
+    {
+        // Combine paths to get the full path
+        var obsidianHiddenFolder =
+            Path.Combine(Application.dataPath, "Obsidity", vaultName, ".obsidian").Replace("\\", "/");
+        CreateFolder(obsidianHiddenFolder);
+        // creates app.json inside .obsidian folder
+        File.WriteAllText(Path.Combine(obsidianHiddenFolder, "app.json"), ObsidityStrings.AppJson);
+
+        var obsidianNotesFolder = Path.Combine(Application.dataPath, "Obsidity", vaultName, "obsidianNotes")
+            .Replace("\\", "/");
+        CreateFolder(obsidianNotesFolder);
     }
 }

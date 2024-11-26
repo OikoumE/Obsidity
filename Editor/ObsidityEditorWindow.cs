@@ -8,17 +8,27 @@ namespace Editor
     public class ObsidityEditorWindow : EditorWindow
     {
         private const float SuccessDisplayTime = 5.0f;
+
+        private const string InputFieldControlName = "MyInputField";
         private static double _startTime;
+
+        private bool _allowKeyboardSave = true;
 
         // unity event
         public void OnGUI()
         {
             // show any information if required
             ShowInformation();
+            InputEventHandler();
             // disable editor input if not initialzied
             using (new EditorGUI.DisabledScope(!ObsidityMain.IsInitialized()))
             {
-                GUILayout.Label("Obsidity Editor", EditorStyles.boldLabel);
+                GUILayout.Label("Obsidity", EditorStyles.boldLabel);
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Save on shift+enter");
+                _allowKeyboardSave = GUILayout.Toggle(_allowKeyboardSave, "");
+                GUILayout.EndHorizontal();
+
                 // title and tag input
                 var tContent = new GUIContent("Title: ", "This is the title at the top of your note.");
                 var tagsContent = new GUIContent("Tags: ", "Space separated list of tags.");
@@ -27,6 +37,7 @@ namespace Editor
                 //display date and text area
                 GUILayout.Label("Date:" + DateTime.Now.ToString("yyyy-MM-dd "));
                 GUILayout.Label("Text Area:");
+                GUI.SetNextControlName(InputFieldControlName);
                 _textContent =
                     EditorGUILayout.TextArea(_textContent, GUILayout.Height(50), GUILayout.ExpandHeight(true));
                 // save/clear buttons
@@ -81,6 +92,25 @@ namespace Editor
                 if (anyConditionTrue)
                     RemoveHelpBoxTimer();
             }
+        }
+
+        /// <summary>
+        ///     listens for shift+enter if the editor content window has focus
+        /// </summary>
+        private void InputEventHandler()
+        {
+            if (!_allowKeyboardSave)
+                return;
+            // listens for shift+enter to save
+            var e = Event.current;
+            if (GUI.GetNameOfFocusedControl() != InputFieldControlName)
+                return;
+            if (e.type != EventType.KeyDown)
+                return;
+            if (Event.current.keyCode != KeyCode.Return || !Event.current.shift) return;
+            Debug.Log("Shift+Enter pressed");
+            Event.current.Use();
+            SaveAndResetForm();
         }
 
         // assigns UpdateTimer to unityEditor.update loop

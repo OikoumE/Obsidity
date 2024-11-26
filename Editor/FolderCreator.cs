@@ -35,9 +35,15 @@ public static class FolderCreator
         CreateFolder(obsidianHiddenFolder);
         // creates app.json inside .obsidian folder
         File.WriteAllText(Path.Combine(obsidianHiddenFolder, "app.json"), ObsidityStrings.AppJson);
-
+        // create folder for obsidian notes
+        // (automatically assigns obsidian to create files to this folder via app.json)
         var obsidianNotesFolder = Path.Combine(Application.dataPath, "Obsidity", vaultName, "obsidianNotes")
             .Replace("\\", "/");
         CreateFolder(obsidianNotesFolder);
+        // create folder for Obsidity notes. save it to playerPrefs
+        var obsidityNotesFolder = Path.Combine(Application.dataPath, "Obsidity", vaultName, "ObsidityNotes")
+            .Replace("\\", "/");
+        ObsidityPlayerPrefs.SaveStringKey(ObsidityPlayerPrefsKeys.ObsidityNotesFolder, obsidityNotesFolder);
+        CreateFolder(obsidityNotesFolder);
     }
 }

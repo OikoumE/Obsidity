@@ -1,20 +1,20 @@
 ﻿using System;
 using UnityEngine;
 
-
 /// <summary>
-/// helper enum for gettin playerPrefsKeys
+///     helper enum for gettin playerPrefsKeys
 /// </summary>
 public enum ObsidityPlayerPrefsKeys
 {
     IsInitialized,
     FullPath,
     VaultName,
-    FileNameIndex
+    FileNameIndex,
+    ObsidityNotesFolder
 }
 
 /// <summary>
-/// helper class for handling playerPref keys
+///     helper class for handling playerPref keys
 /// </summary>
 public static class ObsidityPlayerPrefs
 {
@@ -22,6 +22,7 @@ public static class ObsidityPlayerPrefs
     public const string FullPathKey = "ObsidityVaultFullPath";
     public const string VaultNameKey = "ObsidityVaultName";
     public const string FileNameIndexKey = "FileNameIndex";
+    public const string ObsidityNotesFolderKey = "ObsidityNotesFolder";
 
 
     private static string GetStringKeyFromEnum(ObsidityPlayerPrefsKeys key)
@@ -33,6 +34,7 @@ public static class ObsidityPlayerPrefs
             ObsidityPlayerPrefsKeys.FullPath => FullPathKey,
             ObsidityPlayerPrefsKeys.VaultName => VaultNameKey,
             ObsidityPlayerPrefsKeys.FileNameIndex => FileNameIndexKey,
+            ObsidityPlayerPrefsKeys.ObsidityNotesFolder => ObsidityNotesFolderKey,
             _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
         };
     }

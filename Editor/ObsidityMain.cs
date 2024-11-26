@@ -16,12 +16,13 @@ public static class ObsidityMain
         try
         {
             var vaultName = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.VaultName);
-            var vaultFullPath = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.FullPath);
+            var vaultFullPath = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.ObsidityNotesFolder);
             var index = ObsidityPlayerPrefs.GetInt(ObsidityPlayerPrefsKeys.FileNameIndex);
             var newIndex = index + 1;
             // assign filename
             var fileName = $"{vaultName}_{newIndex:D5}.md";
             ObsidityPlayerPrefs.SaveIntKey(ObsidityPlayerPrefsKeys.FileNameIndex, newIndex);
+
             var fullFileNamePath = Path.Combine(vaultFullPath, fileName).Replace("\\", "/");
             // assign meta+content
             var stringData =

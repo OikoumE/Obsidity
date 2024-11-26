@@ -23,3 +23,6 @@ OpenSauce
 
 ![image](https://github.com/user-attachments/assets/9e8eeb9f-798b-402f-afb8-b3c088f3dfef)
 ![1image](https://github.com/user-attachments/assets/2692f86b-b0ce-4e1e-a934-80f544449091)
+
+### Changelog:
+26/11 - added export_unitypackage.yml workflow

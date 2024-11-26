@@ -23,6 +23,7 @@ namespace Editor
                 var newIndex = index + 1;
                 // assign filename
                 var fileName = $"{vaultName}_{newIndex:D5}.md";
+                ObsidityLogger.Log($"Saved file {fileName}");
                 ObsidityPlayerPrefs.SaveIntKey(ObsidityPlayerPrefsKeys.FileNameIndex, newIndex);
 
                 var fullFileNamePath = Path.Combine(vaultFullPath, fileName).Replace("\\", "/");

@@ -120,7 +120,6 @@ namespace Editor
             if (e.type != EventType.KeyDown)
                 return;
             if (Event.current.keyCode != KeyCode.Return || !Event.current.shift) return;
-            Debug.Log("Shift+Enter pressed");
             Event.current.Use();
             SaveAndResetForm();
         }

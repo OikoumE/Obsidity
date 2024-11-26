@@ -19,15 +19,12 @@ namespace Editor
         {
             // show any information if required
             ShowInformation();
-            InputEventHandler();
             // disable editor input if not initialzied
             using (new EditorGUI.DisabledScope(!ObsidityMain.IsInitialized()))
             {
                 GUILayout.Label("Obsidity", EditorStyles.boldLabel);
-                GUILayout.BeginHorizontal();
-                GUILayout.Label("Save on shift+enter");
-                _allowKeyboardSave = GUILayout.Toggle(_allowKeyboardSave, "");
-                GUILayout.EndHorizontal();
+
+                InputEventHandler();
 
                 // title and tag input
                 var tContent = new GUIContent("Title: ", "This is the title at the top of your note.");
@@ -41,15 +38,32 @@ namespace Editor
                 _textContent =
                     EditorGUILayout.TextArea(_textContent, GUILayout.Height(50), GUILayout.ExpandHeight(true));
                 // save/clear buttons
-                GUILayout.BeginHorizontal();
-                if (GUILayout.Button("Save"))
-                    SaveAndResetForm();
-                if (GUILayout.Button("Clear"))
-                    ResetInputForm();
-                GUILayout.EndHorizontal();
+                SaveClearButtons();
             }
 
             return;
+
+            void SaveClearButtons()
+            {
+                GUILayout.BeginHorizontal();
+
+                var canSave = _textTitle.Length > 0 &&
+                              _textTags.Length > 0 &&
+                              _textContent.Length > 0;
+                using (new EditorGUI.DisabledScope(canSave))
+                {
+                    if (GUILayout.Button("Save"))
+                        SaveAndResetForm();
+                }
+
+                using (new EditorGUI.DisabledScope(!canSave))
+                {
+                    if (GUILayout.Button("Clear"))
+                        ResetInputForm();
+                }
+
+                GUILayout.EndHorizontal();
+            }
 
             void ShowInformation()
             {
@@ -99,6 +113,7 @@ namespace Editor
         /// </summary>
         private void InputEventHandler()
         {
+            _allowKeyboardSave = GUILayout.Toggle(_allowKeyboardSave, "Save on Shift+Enter");
             if (!_allowKeyboardSave)
                 return;
             // listens for shift+enter to save

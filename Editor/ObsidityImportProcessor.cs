@@ -8,10 +8,8 @@ namespace Editor
         private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets,
             string[] movedAssets, string[] movedFromAssetPaths)
         {
-            var foundObsidity = false;
             // checks if Obsidity is added, moved or removed, and triggers initialization 
             HandleObsidityImport(importedAssets);
-            HandleObsidityDeletion(deletedAssets);
         }
 
 
@@ -29,15 +27,16 @@ namespace Editor
                     ObsidityLogger.Log("Obsidity package already initialized.");
                 }
             }
+            else
+            {
+                HandleObsidityDeletion();
+            }
         }
 
-        private static void HandleObsidityDeletion(string[] assets)
+        private static void HandleObsidityDeletion()
         {
-            if (FoundObsidity(assets))
-            {
-                ObsidityLogger.LogErr("Obsidity package not imported");
-                ObsidityPlayerPrefs.DeleteObsidityPlayerPrefs();
-            }
+            ObsidityLogger.LogErr("Obsidity package not imported");
+            ObsidityPlayerPrefs.DeleteObsidityPlayerPrefs();
         }
 
         private static bool FoundObsidity(string[] assets)

@@ -10,13 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    #checkout
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Set up Unity
         uses: game-ci/unity-builder@v2
         with:
-          unityVersion: 2021.2.14f1
+          unityVersion: 6000.0.23f1
 
       - name: Export Unity Package
         run: |

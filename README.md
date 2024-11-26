@@ -3,11 +3,17 @@
 A tiny plugin that docks right in UnityEditor that allows you to take notes easily and quickly.
 ---
 ## Installation
-Import Obsidity.UnityPackage to unity, this should automatically open the Intro Window.
-(the UnityPackage will potentially not be updated/re-exported, the latest code will always be in the repo) 
+1. copy the repo-url (https://github.com/OikoumE/Obsidity.git)
+2. open unity package manager
+3. click "add from github"
+4. paste URL
+![image](https://github.com/user-attachments/assets/813eda99-27b5-43ee-b4d3-679a3076e993)
+<img src="https://github.com/user-attachments/assets/813eda99-27b5-43ee-b4d3-679a3076e993" alt="image" width="300" />
+
 Initialize a Vault by going to 'Window>Obsidity>Obsidity Intro' and follow the instructions provided.
 After initializing a Vault, you are set to go.
 ---
+
 ## Usage
 After initializing you can access the Obsidity Editor via 'Window>Obsidity>Obsidity Editor' or the button in the Intro window.
 If you want you can use Obsidian.md to read the notes. 

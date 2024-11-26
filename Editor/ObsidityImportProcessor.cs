@@ -12,9 +12,13 @@ namespace Obsidity.Scripts.Editor
             foreach (var asset in importedAssets)
                 if (asset.EndsWith(".cs") && asset.Contains("Obsidity"))
                 {
-					
-                    ObsidityLogger.Log("Obsidity package imported. Running initialization script...");
-                    RunInitializationScript();
+					if (!ObsidityMain.IsInitialized())
+					{
+                    	ObsidityLogger.Log("Obsidity package imported. Running initialization script...");
+                    	RunInitializationScript();
+					}else{
+						ObsidityLogger.Log("Obsidity package already initialized.");
+					}
                     break;
                 }
         }
@@ -23,8 +27,7 @@ namespace Obsidity.Scripts.Editor
         {
             // initialization logic here
             ObsidityLogger.Log("Initialization script executed!");
-			if (!ObsidityMain.IsInitialized())
-            	ObsidityWelcomeEditorWindow.ShowWindow();
+            ObsidityWelcomeEditorWindow.ShowWindow();
         }
     }
 }

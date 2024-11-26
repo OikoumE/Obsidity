@@ -1,8 +1,8 @@
-using Editor;
+using Obsidity.Scripts.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace Obsidity.Scripts.Editor
+namespace Editor
 {
     public class ObsidityWelcomeEditorWindow : EditorWindow
     {
@@ -39,7 +39,7 @@ namespace Obsidity.Scripts.Editor
                     // Refresh the AssetDatabase to ensure the new folder appears in the Project window
                     AssetDatabase.Refresh();
                     // open obsidity editor
-                    ObsidityEditorWindow.ShowWindow();
+                    ReplaceWelcomeWindowWithEditorWindow();
                 }
             }
 
@@ -74,7 +74,7 @@ namespace Obsidity.Scripts.Editor
 
             // open editor button (makes above pointless :)
             if (GUILayout.Button("Open Obsidity Editor"))
-                ObsidityEditorWindow.ShowWindow();
+                ReplaceWelcomeWindowWithEditorWindow();
 
             // if not correct
             GUILayout.Box(GUIContent.none, GUILayout.ExpandWidth(true), GUILayout.Height(1));
@@ -83,11 +83,24 @@ namespace Obsidity.Scripts.Editor
                 ObsidityMain.CheckForVault();
         }
 
+        private static void ReplaceWelcomeWindowWithEditorWindow()
+        {
+            var editorWindow = ObsidityEditorWindow.ShowAndGetWindow();
+            var thisWindow = GetWindow<ObsidityWelcomeEditorWindow>();
+            editorWindow.position = thisWindow.position;
+            CloseWindow();
+        }
 
         [MenuItem("Window/Obsidity/Obsidity Intro")]
         public static void ShowWindow()
         {
             GetWindow<ObsidityWelcomeEditorWindow>();
+        }
+
+        public static void CloseWindow()
+        {
+            var window = GetWindow<ObsidityWelcomeEditorWindow>();
+            if (window != null) window.Close();
         }
     }
 }

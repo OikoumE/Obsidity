@@ -86,7 +86,6 @@ namespace Editor
         // assigns UpdateTimer to unityEditor.update loop
         private static void RemoveHelpBoxTimer()
         {
-            
             _startTime = EditorApplication.timeSinceStartup;
             EditorApplication.update += UpdateTimer;
         }
@@ -113,6 +112,13 @@ namespace Editor
             GetWindow<ObsidityEditorWindow>();
         }
 
+        public static ObsidityEditorWindow ShowAndGetWindow()
+        {
+            ShowWindow();
+            return GetWindow<ObsidityEditorWindow>();
+        }
+
+
         private void SaveAndResetForm()
         {
             // make sure input are not empty
@@ -121,7 +127,7 @@ namespace Editor
                 _showEmptyError = true;
                 return;
             }
-            
+
             var dt = DateTime.Now.ToString("yyyy-MM-dd");
             // create data
             var data = new ObsidityData(_textContent, dt, _textTags, _textTitle);
@@ -136,6 +142,7 @@ namespace Editor
                 _showSaveSuccess = true;
                 ResetInputForm();
             }
+
             // refresh UI
             Repaint();
         }
@@ -150,7 +157,7 @@ namespace Editor
             GUI.FocusControl(null);
             Repaint();
         }
-        
+
 #pragma warning disable CS0414
         private bool _saveSuccess;
         private static bool _showEmptyError;

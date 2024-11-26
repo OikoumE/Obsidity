@@ -21,8 +21,8 @@ jobs:
       - name: Export Unity Package
         run: |
           # Set paths
-          PROJECT_PATH="${GITHUB_WORKSPACE}/path/to/your/non-unity-folder"
-          EXPORT_PATH="${GITHUB_WORKSPACE}/path/to/export"
+          PROJECT_PATH="${GITHUB_WORKSPACE}/Assets/Obsidity/"
+          EXPORT_PATH="${GITHUB_WORKSPACE}/Export"
 
           # Create export directory
           mkdir -p $EXPORT_PATH

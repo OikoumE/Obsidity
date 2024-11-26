@@ -1,0 +1,8 @@
+{
+  "name": "com.oikoume.obsidity",
+  "version": "1.0.0",
+  "displayName": "Obsidity",
+  "description": "Obsidity",
+  "unity": "6000.0",
+  "dependencies": {}
+}

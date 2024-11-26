@@ -1,0 +1,45 @@
+name: Export Unity Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Unity
+        uses: game-ci/unity-builder@v2
+        with:
+          unityVersion: 2021.2.14f1
+
+      - name: Export Unity Package
+        run: |
+          # Set paths
+          PROJECT_PATH="${GITHUB_WORKSPACE}/path/to/your/non-unity-folder"
+          EXPORT_PATH="${GITHUB_WORKSPACE}/path/to/export"
+
+          # Create export directory
+          mkdir -p $EXPORT_PATH
+
+          # Export the package
+          unity-editor -batchmode -nographics -quit -projectPath $PROJECT_PATH -exportPackage "Assets/Obsidity" "$EXPORT_PATH/Obsidity.unitypackage"
+
+      - name: Upload Unity Package
+        uses: actions/upload-artifact@v2
+        with:
+          name: UnityPackage
+          path: $EXPORT_PATH/Obsidity.unitypackage
+          if-no-files-found: error
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: $EXPORT_PATH/Obsidity.unitypackage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

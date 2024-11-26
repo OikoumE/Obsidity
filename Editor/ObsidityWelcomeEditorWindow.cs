@@ -52,7 +52,7 @@ namespace Obsidity.Scripts.Editor
             var vaultName = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.VaultName);
 
             EditorGUILayout.HelpBox(ObsidityStrings.AlreadyInitialized, MessageType.Warning);
-            EditorGUILayout.HelpBox($"Vault: {vaultName} at location: {fullPath}", MessageType.Info);
+            EditorGUILayout.HelpBox($"Vault Name: {vaultName}\nVault Location: {fullPath}", MessageType.Info);
 
             // info about where to open editor
             var wordWrapStyle = new GUIStyle(GUI.skin.label);

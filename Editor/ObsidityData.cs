@@ -29,7 +29,7 @@ public static class ObsidityStrings
         "You can always find the editor in the menu: 'Window/Obsidity/Obsidity Editor' Or click the button below";
 
     public static readonly string CheckForVault = "If you believe this is wrong you can 'Check for Obsidity vault'";
-    public static readonly string AlreadyInitialized = "Obsidity is already initialized at";
+    public static readonly string AlreadyInitialized = "Obsidity is already initialized";
     public static readonly string EmptyError = "Please fill out all the fields.";
 
     public static readonly string NotInitializedError =

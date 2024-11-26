@@ -102,6 +102,7 @@ namespace Editor
                 _showSaveError = false;
                 _showSaveSuccess = false;
                 // unreg from update loop
+                GetWindow<ObsidityEditorWindow>().Repaint();
                 EditorApplication.update -= UpdateTimer;
             }
         }

@@ -23,6 +23,7 @@ namespace Obsidity.Scripts.Editor
             fontStyle = FontStyle.Bold
         };
 
+        // helper method for drawing textField
         public static string DrawTextField(string label, string textContent)
         {
             GUILayout.BeginHorizontal();
@@ -33,6 +34,7 @@ namespace Obsidity.Scripts.Editor
             return textContent;
         }
 
+        // override helper method for drawing textField
         public static string DrawTextField(GUIContent label, string textContent)
         {
             GUILayout.BeginHorizontal();

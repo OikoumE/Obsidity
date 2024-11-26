@@ -2,6 +2,9 @@
 
 public static class ObsidityLogger
 {
+    /// <summary>
+    /// simple helperclass for rich text on log outputs from Obsidity
+    /// </summary>
     private static readonly string _pre = "[OBSIDITY]: ";
 
     public static void LogErr(string err, Object ctx = null)

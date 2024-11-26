@@ -4,9 +4,11 @@ namespace Obsidity.Scripts.Editor
 {
     public class ObsidityImportProcessor : AssetPostprocessor
     {
+        
         private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets,
             string[] movedAssets, string[] movedFromAssetPaths)
         {
+            // checks if Obsidity is added, moved or removed, and triggers initialization 
             foreach (var asset in importedAssets)
                 if (asset.EndsWith(".cs") && asset.Contains("Obsidity"))
                 {
@@ -18,7 +20,7 @@ namespace Obsidity.Scripts.Editor
 
         private static void RunInitializationScript()
         {
-            // Your initialization logic here
+            // initialization logic here
             ObsidityLogger.Log("Initialization script executed!");
             ObsidityWelcomeEditorWindow.ShowWindow();
         }

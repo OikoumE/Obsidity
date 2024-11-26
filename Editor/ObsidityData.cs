@@ -25,7 +25,6 @@ public class ObsidityData
 public static class ObsidityStrings
 {
     public static readonly string DefaultPath = "/Obsidity/Vault";
-
     public static readonly string FindObsidityWindow =
         "You can always find the editor in the menu: 'Window/Obsidity/Obsidity Editor' Or click the button below";
 

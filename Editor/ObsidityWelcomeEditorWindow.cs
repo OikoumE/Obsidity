@@ -10,13 +10,17 @@ namespace Obsidity.Scripts.Editor
 
         public void OnGUI()
         {
+            // Shows window content dependant on state
             GUILayout.Label("Welcome to Obsidity", EditorStyles.boldLabel);
             if (!ObsidityMain.IsInitialized())
                 InitializeVault();
             else
                 VaultIsInitialized();
         }
-
+/// <summary>
+/// displayed in editor if vault is not initialized
+/// </summary>
+/// <returns></returns>
         private void InitializeVault()
         {
             GUILayout.Label("Please initialize the Obsidian Vault.");
@@ -27,11 +31,14 @@ namespace Obsidity.Scripts.Editor
             // disable button if name is empty
             using (new EditorGUI.DisabledScope(_vaultName.Length == 0))
             {
+                // create new vault
                 if (GUILayout.Button("Initialize Vault"))
                     ObsidityMain.CreateVault(_vaultName);
 #if UNITY_EDITOR
                 // Refresh the AssetDatabase to ensure the new folder appears in the Project window
                 AssetDatabase.Refresh();
+                // open obsidity editor
+                ObsidityEditorWindow.ShowWindow();
 #endif
             }
 
@@ -43,14 +50,17 @@ namespace Obsidity.Scripts.Editor
         {
             GUI.FocusControl(null);
             _vaultName = "";
-            // _vaultPath = ObsidityStrings.DefaultPath;
         }
-
+/// <summary>
+/// displayed in editor if vault is initialized
+/// </summary>
+/// <returns></returns>
         private void VaultIsInitialized()
         {
             var fullPath = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.FullPath);
             var vaultName = ObsidityPlayerPrefs.GetString(ObsidityPlayerPrefsKeys.VaultName);
 
+            // info about initialized state and vault name+location
             EditorGUILayout.HelpBox(ObsidityStrings.AlreadyInitialized, MessageType.Warning);
             EditorGUILayout.HelpBox($"Vault Name: {vaultName}\nVault Location: {fullPath}", MessageType.Info);
 

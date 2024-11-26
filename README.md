@@ -27,7 +27,7 @@ you should see a <.obsidian> folder present, accept and Obdisian should automati
 ---
 
 ## Support
-none :D
+cant promise anything but you can try opening an issue here in the repo
 
 ---
 

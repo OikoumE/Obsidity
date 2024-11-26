@@ -47,20 +47,17 @@ namespace Editor
             {
                 GUILayout.BeginHorizontal();
                 // quick inversion lol
-                var cantSave = _textTitle.Length == 0 &&
-                               _textTags.Length == 0 &&
-                               _textContent.Length == 0;
-                using (new EditorGUI.DisabledScope(!cantSave))
+                var canSave = _textTitle.Length > 0 &&
+                              _textTags.Length > 0 &&
+                              _textContent.Length > 0;
+                using (new EditorGUI.DisabledScope(!canSave))
                 {
                     if (GUILayout.Button("Save"))
                         SaveAndResetForm();
                 }
 
-                using (new EditorGUI.DisabledScope(cantSave))
-                {
-                    if (GUILayout.Button("Clear"))
-                        ResetInputForm();
-                }
+                if (GUILayout.Button("Clear"))
+                    ResetInputForm();
 
                 GUILayout.EndHorizontal();
             }

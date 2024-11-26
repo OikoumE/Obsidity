@@ -3,20 +3,21 @@ name: Export Unity Package
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+    #checkout
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Unity
         uses: game-ci/unity-builder@v2
         with:
-          unityVersion: 2021.2.14f1
+          unityVersion: 6000.0.23f1
 
       - name: Export Unity Package
         run: |
@@ -31,7 +32,7 @@ jobs:
           unity-editor -batchmode -nographics -quit -projectPath $PROJECT_PATH -exportPackage "Assets/Obsidity" "$EXPORT_PATH/Obsidity.unitypackage"
 
       - name: Upload Unity Package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: UnityPackage
           path: $EXPORT_PATH/Obsidity.unitypackage

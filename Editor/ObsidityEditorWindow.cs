@@ -128,7 +128,7 @@ namespace Editor
         private static void RemoveHelpBoxTimer()
         {
             _startTime = EditorApplication.timeSinceStartup;
-            EditorApplication.update += UpdateTimer;
+            // EditorApplication.update += UpdateTimer;
         }
 
 

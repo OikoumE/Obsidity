@@ -128,7 +128,7 @@ namespace Editor
         private static void RemoveHelpBoxTimer()
         {
             _startTime = EditorApplication.timeSinceStartup;
-            // EditorApplication.update += UpdateTimer;
+            EditorApplication.update += UpdateTimer;
         }
 
 
@@ -202,7 +202,7 @@ namespace Editor
             _textContent = "";
             _textTags = "";
             _textTitle = "";
-           GUI.FocusControl(null);
+            GUI.FocusControl(null);
             Repaint();
         }
 

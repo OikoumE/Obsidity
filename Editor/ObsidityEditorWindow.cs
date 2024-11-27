@@ -192,7 +192,7 @@ namespace Editor
             }
 
             // refresh UI
-            Repaint();
+            //TODO Repaint();
         }
 
 
@@ -202,8 +202,8 @@ namespace Editor
             _textContent = "";
             _textTags = "";
             _textTitle = "";
-            GUI.FocusControl(null);
-            Repaint();
+            //TODO GUI.FocusControl(null);
+            //TODO Repaint();
         }
 
 #pragma warning disable CS0414

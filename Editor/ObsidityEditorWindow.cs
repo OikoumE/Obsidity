@@ -202,7 +202,7 @@ namespace Editor
             _textContent = "";
             _textTags = "";
             _textTitle = "";
-            //TODO GUI.FocusControl(null);
+           GUI.FocusControl(null);
             Repaint();
         }
 

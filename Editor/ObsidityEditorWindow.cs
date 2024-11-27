@@ -124,9 +124,9 @@ namespace Editor
             SaveAndResetForm();
         }
 
-        // assigns UpdateTimer to unityEditor.update loop
         private static void RemoveHelpBoxTimer()
         {
+            // assigns UpdateTimer to unityEditor.update loop
             _startTime = EditorApplication.timeSinceStartup;
             EditorApplication.update += UpdateTimer;
         }
@@ -142,12 +142,10 @@ namespace Editor
                 _showEmptyError = false;
                 _showSaveError = false;
                 _showSaveSuccess = false;
-                // unreg from update loop
-                // GetWindow<ObsidityEditorWindow>().Repaint(); //! might steal focus
-                //* trying fix with delayCall
                 // Queue a GUI update without repainting immediately
                 if (EditorApplication.isFocused)
                     EditorApplication.delayCall += () => GetWindow<ObsidityEditorWindow>().Repaint();
+                // unReg from update loop
                 EditorApplication.update -= UpdateTimer;
             }
         }
@@ -155,11 +153,13 @@ namespace Editor
         [MenuItem("Window/Obsidity/Obsidity Editor")]
         public static void ShowWindow()
         {
+            // shows the editorWindow  (unity event)
             GetWindow<ObsidityEditorWindow>();
         }
 
         public static ObsidityEditorWindow ShowAndGetWindow()
         {
+            //shows the window and returns a ref to it
             ShowWindow();
             return GetWindow<ObsidityEditorWindow>();
         }

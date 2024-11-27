@@ -145,9 +145,11 @@ namespace Editor
                 // unreg from update loop
                 // GetWindow<ObsidityEditorWindow>().Repaint(); //! might steal focus
                 //* trying fix with delayCall
-                //! nopeEditorApplication.delayCall += () => GetWindow<ObsidityEditorWindow>().Repaint();
+                if (EditorApplication.isFocused)
+                    EditorApplication.delayCall += () => GetWindow<ObsidityEditorWindow>().Repaint();
                 // Queue a GUI update without repainting immediately
-                EditorApplication.QueuePlayerLoopUpdate();
+                // EditorApplication.QueuePlayerLoopUpdate();
+
                 EditorApplication.update -= UpdateTimer;
             }
         }

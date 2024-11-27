@@ -100,7 +100,7 @@ namespace Editor
         public static void CloseWindow()
         {
             var window = GetWindow<ObsidityWelcomeEditorWindow>();
-            if (window != null) window.Close();
+            if (window) window.Close();
         }
     }
 }

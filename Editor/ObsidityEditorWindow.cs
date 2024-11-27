@@ -143,7 +143,9 @@ namespace Editor
                 _showSaveError = false;
                 _showSaveSuccess = false;
                 // unreg from update loop
-                GetWindow<ObsidityEditorWindow>().Repaint();
+                // GetWindow<ObsidityEditorWindow>().Repaint(); //! might steal focus
+                //* trying fix with delayCall
+                EditorApplication.delayCall += () => GetWindow<ObsidityEditorWindow>().Repaint();
                 EditorApplication.update -= UpdateTimer;
             }
         }

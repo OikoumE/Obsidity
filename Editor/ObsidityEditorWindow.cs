@@ -33,19 +33,27 @@ namespace Editor
                 _textTags = ObsidityEditorHelper.DrawTextField(tagsContent, _textTags);
                 //display date and text area
                 GUILayout.Label("Date:" + DateTime.Now.ToString("yyyy-MM-dd "));
-                GUILayout.Label("Text Area:");
-                var textAreaStyle = new GUIStyle(GUI.skin.textArea);
-                textAreaStyle.fontSize = 25; // Set desired font size
-                GUI.SetNextControlName(InputFieldControlName);
-                _textContent =
-                    EditorGUILayout.TextArea(_textContent, textAreaStyle, GUILayout.Height(50),
-                        GUILayout.ExpandHeight(true));
-
+                // content window
+                DrawTextContentArea();
                 // save/clear buttons
                 SaveClearButtons();
             }
 
             return;
+
+            void DrawTextContentArea()
+            {
+                GUILayout.Label("Text Area:");
+                var textAreaStyle = new GUIStyle(GUI.skin.textArea)
+                {
+                    fontSize = 25, // Set desired font size
+                    wordWrap = true // Enable word wrap
+                };
+                GUI.SetNextControlName(InputFieldControlName);
+                _textContent =
+                    EditorGUILayout.TextArea(_textContent, textAreaStyle, GUILayout.Height(50),
+                        GUILayout.ExpandHeight(true));
+            }
 
             void SaveClearButtons()
             {

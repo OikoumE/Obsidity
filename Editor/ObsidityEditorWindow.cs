@@ -34,9 +34,13 @@ namespace Editor
                 //display date and text area
                 GUILayout.Label("Date:" + DateTime.Now.ToString("yyyy-MM-dd "));
                 GUILayout.Label("Text Area:");
+                var textAreaStyle = new GUIStyle(GUI.skin.textArea);
+                textAreaStyle.fontSize = 25; // Set desired font size
                 GUI.SetNextControlName(InputFieldControlName);
                 _textContent =
-                    EditorGUILayout.TextArea(_textContent, GUILayout.Height(50), GUILayout.ExpandHeight(true));
+                    EditorGUILayout.TextArea(_textContent, textAreaStyle, GUILayout.Height(50),
+                        GUILayout.ExpandHeight(true));
+
                 // save/clear buttons
                 SaveClearButtons();
             }

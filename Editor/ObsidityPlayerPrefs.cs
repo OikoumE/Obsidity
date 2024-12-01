@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Library.PackageCache.com.oikoume.obsidity
+namespace Editor
 {
     /// <summary>
     ///     helper enum for gettin playerPrefsKeys

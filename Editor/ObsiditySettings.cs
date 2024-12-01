@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace Library.PackageCache.com.oikoume.obsidity
+namespace Editor
 {
     public static class ObsiditySettings
     {

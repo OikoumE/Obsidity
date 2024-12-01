@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEditor;
 
-namespace Library.PackageCache.com.oikoume.obsidity
+namespace Editor
 {
     public class ObsidityImportProcessor : AssetPostprocessor
     {

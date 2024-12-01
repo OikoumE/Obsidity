@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Library.PackageCache.com.oikoume.obsidity
+namespace Editor
 {
     public class ObsidityEditorWindow : EditorWindow
     {

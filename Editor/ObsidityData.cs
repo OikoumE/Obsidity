@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Library.PackageCache.com.oikoume.obsidity
+namespace Editor
 {
     [Serializable] //
     public class ObsidityData

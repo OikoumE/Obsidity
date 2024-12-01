@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Library.PackageCache.com.oikoume.obsidity
+namespace Editor
 {
     public class ObsidityWelcomeEditorWindow : EditorWindow
     {

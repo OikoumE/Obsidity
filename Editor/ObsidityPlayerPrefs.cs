@@ -14,7 +14,9 @@ namespace Editor
         FileNameIndex,
         ObsidityNotesFolder,
         CapitalizeTitle,
-        LinkTitle
+        LinkTitle,
+        FontSize,
+        SaveShiftReturn
     }
 
     /// <summary>
@@ -29,6 +31,8 @@ namespace Editor
         public const string ObsidityNotesFolderKey = "ObsidityNotesFolder";
         public const string CapitalizeTitleKey = "CapitalizeTitle";
         public const string LinkTitleKey = "LinkTitle";
+        public const string FontSizeKey = "FontSize";
+        public const string SaveShiftReturnKey = "SaveShiftReturn";
 
 
         private static string GetStringKeyFromEnum(ObsidityPlayerPrefsKeys key)
@@ -43,6 +47,8 @@ namespace Editor
                 ObsidityPlayerPrefsKeys.ObsidityNotesFolder => ObsidityNotesFolderKey,
                 ObsidityPlayerPrefsKeys.CapitalizeTitle => CapitalizeTitleKey,
                 ObsidityPlayerPrefsKeys.LinkTitle => LinkTitleKey,
+                ObsidityPlayerPrefsKeys.FontSize => FontSizeKey,
+                ObsidityPlayerPrefsKeys.SaveShiftReturn => SaveShiftReturnKey,
                 _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
             };
         }
@@ -60,11 +66,13 @@ namespace Editor
 
         internal static bool GetPrefAsBool(ObsidityPlayerPrefsKeys key)
         {
+            // does what it says on the tin!
             return GetInt(key) == 1;
         }
 
-        internal static void SetPrefAsBool(ObsidityPlayerPrefsKeys key, bool value)
+        internal static void SaveIntKey(ObsidityPlayerPrefsKeys key, bool value)
         {
+            // does what it says on the tin!
             var i = value ? 1 : 0;
             SaveIntKey(key, i);
         }
@@ -74,6 +82,13 @@ namespace Editor
             // does what it says on the tin!
             var sKey = GetStringKeyFromEnum(key);
             return PlayerPrefs.GetString(sKey);
+        }
+
+        public static bool HasKey(ObsidityPlayerPrefsKeys key)
+        {
+            // does what it says on the tin!
+            var sKey = GetStringKeyFromEnum(key);
+            return PlayerPrefs.HasKey(sKey);
         }
 
         public static int GetInt(ObsidityPlayerPrefsKeys key)

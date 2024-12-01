@@ -8,7 +8,6 @@ namespace Editor
 {
     //TODO scan for existing .md's inside Assets/Obsidity/ to restore vaults/add multiple
     //TODO add settings to intro window (editorFontSize, saveOnShiftReturn, etc)
-    //     also potential formatting options ([[Link]] all titles?, etc)
     public static class ObsidityMain
     {
         /// <summary>
@@ -18,12 +17,20 @@ namespace Editor
         /// <returns></returns>
         public static string CreateString(ObsidityData data)
         {
-            //TODO setting: toggle, capitalizeTitle 
-            //TODO setting: toggle, [[Link]] titles
             var title = data.textTitle;
-            if (true) title = title.FirstCharToUpper(); //setting to add
+
+            // setting: toggle, capitalizeTitle 
+            //TODO get setting from ObsiditySettings
+            var doCapital = ObsidityPlayerPrefs.GetPrefAsBool(ObsidityPlayerPrefsKeys.CapitalizeTitle);
+            if (doCapital) title = title.FirstCharToUpper(); //setting to add
+
+            // setting: toggle, [[Link]] titles
+            //TODO get setting from ObsiditySettings
+            var doLink = ObsidityPlayerPrefs.GetPrefAsBool(ObsidityPlayerPrefsKeys.CapitalizeTitle);
+            if (doLink) title = $"[[{title}]]";
+
             return $"{CreateMetaString(data)}" +
-                   $"\n# [[{title}]]" +
+                   $"\n# {title}" +
                    "\n---" +
                    $"\n{data.textContent}" +
                    "\n\n---";

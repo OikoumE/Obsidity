@@ -6,9 +6,9 @@ namespace Editor
 {
     public class ObsidityEditorWindow : EditorWindow
     {
-        private const float SuccessDisplayTime = 5.0f;
+        private const float SuccessDisplayTime = 5.0f; //TODO make setting
 
-        private const string InputFieldControlName = "MyInputField";
+        private const string InputFieldControlName = "MyInputField"; //! no touch
         private static double _startTime;
 
         private bool _allowKeyboardSave = true;
@@ -18,7 +18,7 @@ namespace Editor
         {
             // show any information if required
             ShowInformation();
-            // disable editor input if not initialzied
+            // disable editor input if not initialized
             using (new EditorGUI.DisabledScope(!ObsidityMain.IsInitialized()))
             {
                 GUILayout.Label("Obsidity", EditorStyles.boldLabel);
@@ -28,26 +28,27 @@ namespace Editor
                 // title and tag input
                 var tContent = new GUIContent("Title: ", "This is the title at the top of your note.");
                 var tagsContent = new GUIContent("Tags: ", "Space separated list of tags.");
-                _textTitle = ObsidityEditorHelper.DrawTextField(tContent, _textTitle);
-                _textTags = ObsidityEditorHelper.DrawTextField(tagsContent, _textTags);
+                var fontSize = ObsiditySettings.Get(ObsidityPlayerPrefsKeys.FontSize);
+
+                _textTitle = ObsidityEditorHelper.DrawTextField(tContent, _textTitle, fontSize);
+                _textTags = ObsidityEditorHelper.DrawTextField(tagsContent, _textTags, fontSize);
                 //display date and text area
-                GUILayout.Label("Date:" + DateTime.Now.ToString("yyyy-MM-dd "));
+                var textLabelStyle = new GUIStyle(GUI.skin.label) { fontSize = fontSize };
+                GUILayout.Label("Date:" + DateTime.Now.ToString("yyyy-MM-dd "), textLabelStyle);
                 // content window
-                DrawTextContentArea();
+                DrawTextContentArea(fontSize);
                 // save/clear buttons
                 SaveClearButtons();
             }
 
             return;
 
-            void DrawTextContentArea()
+            void DrawTextContentArea(int fontSize)
             {
-                GUILayout.Label("Text Area:");
-                var textAreaStyle = new GUIStyle(GUI.skin.textArea)
-                {
-                    fontSize = 25, // Set desired font size
-                    wordWrap = true // Enable word wrap
-                };
+                var textLabelStyle = new GUIStyle(GUI.skin.label) { fontSize = fontSize };
+                var textAreaStyle = new GUIStyle(GUI.skin.textArea) { fontSize = fontSize };
+                GUILayout.Label("Text Area:", textLabelStyle);
+                textAreaStyle.wordWrap = true; // Enable word wrap
                 GUI.SetNextControlName(InputFieldControlName);
                 _textContent =
                     EditorGUILayout.TextArea(_textContent, textAreaStyle, GUILayout.Height(50),
@@ -121,7 +122,7 @@ namespace Editor
         /// </summary>
         private void InputEventHandler()
         {
-            _allowKeyboardSave = GUILayout.Toggle(_allowKeyboardSave, "Save on Shift+Enter");
+            _allowKeyboardSave = ObsiditySettings.Get(ObsidityPlayerPrefsKeys.SaveShiftReturn) == 1;
             if (!_allowKeyboardSave)
                 return;
             // listens for shift+enter to save

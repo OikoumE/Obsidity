@@ -21,7 +21,7 @@ The 'Obsidity Welcome' window should appear.
 When you initialize a Vault, the Intro window will close, and the editor window will appear in its place.
 
 
-<img src="https://github.com/user-attachments/assets/9e8eeb9f-798b-402f-afb8-b3c088f3dfef" alt="image" width="200" /><img src="https://github.com/user-attachments/assets/2692f86b-b0ce-4e1e-a934-80f544449091" alt="image" width="200" />
+<img src="https://github.com/user-attachments/assets/6856b136-576b-47af-98d9-0165e0ebbf2b" alt="image" width="200" /><img src="https://github.com/user-attachments/assets/2692f86b-b0ce-4e1e-a934-80f544449091" alt="image" width="200" />
 
 After initializing you can access the Obsidity Editor via 'Window>Obsidity>Obsidity Editor'.
 
@@ -29,7 +29,7 @@ If you want to use Obsidian.md to read the notes, simply open Obsidian, in the b
 navigate to '<your unity project path>/Assets/Obsidity/<Name of your vault>'. 
 
 
-<img src="https://github.com/user-attachments/assets/6856b136-576b-47af-98d9-0165e0ebbf2b" alt="image" width="200" />
+<img src="https://github.com/user-attachments/assets/e7483e1a-b9b6-4036-88ef-5839d0e59b41" alt="image" width="200" />
 
 <img src="https://github.com/user-attachments/assets/49db26e1-77e1-4bf5-8b5a-c0e4e24449c2" alt="image" width="200" />
 

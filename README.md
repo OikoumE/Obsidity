@@ -62,8 +62,10 @@ OpenSauce
 ---
 
 ### Changelog:
-26/11:
+26/11/24:
   - ~~added export_unitypackage.yml workflow~~
   - changed from exporting unitypackage to importing github repo workflow
+01/12/24:
+  - added (multiple) settings and a few minor changes
   
 ---

@@ -44,6 +44,10 @@ namespace Editor
             CreateFolder(obsidianHiddenFolder);
             // creates app.json inside .obsidian folder
             File.WriteAllText(Path.Combine(obsidianHiddenFolder, "app.json"), ObsidityStrings.AppJson);
+            File.WriteAllText(Path.Combine(obsidianHiddenFolder, "appearance.json"), ObsidityStrings.AppearanceJson);
+            File.WriteAllText(Path.Combine(obsidianHiddenFolder, "community-plugins.json"),
+                ObsidityStrings.CommunityPluginsJson);
+            File.WriteAllText(Path.Combine(obsidianHiddenFolder, "core-plugins.json"), ObsidityStrings.CorePluginsJson);
             // create folder for obsidian notes
             // (automatically assigns obsidian to create files to this folder via app.json)
             var obsidianNotesFolder = Path.Combine(Application.dataPath, "Obsidity", vaultName, "obsidianNotes")

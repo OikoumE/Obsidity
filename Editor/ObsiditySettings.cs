@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Obsidity.Scripts.Editor;
 using UnityEditor;
 
-namespace Editor
+namespace Library.PackageCache.com.oikoume.obsidity
 {
     public static class ObsiditySettings
     {

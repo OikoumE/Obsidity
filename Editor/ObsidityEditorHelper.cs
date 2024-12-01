@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Obsidity.Scripts.Editor
+namespace Library.PackageCache.com.oikoume.obsidity
 {
     public static class ObsidityEditorHelper
     {
@@ -57,17 +57,17 @@ namespace Obsidity.Scripts.Editor
             return t;
         }
     }
-}
 
-public static class ObsidityExtensions
-{
-    public static string FirstCharToUpper(this string input)
+    public static class ObsidityExtensions
     {
-        return input switch
+        public static string FirstCharToUpper(this string input)
         {
-            null => throw new ArgumentNullException(nameof(input)),
-            "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
-            _ => string.Concat(input[0].ToString().ToUpper(), input.AsSpan(1).ToArray())
-        };
+            return input switch
+            {
+                null => throw new ArgumentNullException(nameof(input)),
+                "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
+                _ => string.Concat(input[0].ToString().ToUpper(), input.AsSpan(1).ToArray())
+            };
+        }
     }
 }

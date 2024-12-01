@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace Library.PackageCache.com.oikoume.obsidity
 {
     //TODO scan for existing .md's inside Assets/Obsidity/ to restore vaults/add multiple
     //TODO add settings to intro window (editorFontSize, saveOnShiftReturn, etc)

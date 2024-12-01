@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace Library.PackageCache.com.oikoume.obsidity
 {
     public static class FolderCreator
     {

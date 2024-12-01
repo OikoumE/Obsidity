@@ -1,9 +1,8 @@
 using System;
-using Obsidity.Scripts.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace Library.PackageCache.com.oikoume.obsidity
 {
     public class ObsidityEditorWindow : EditorWindow
     {

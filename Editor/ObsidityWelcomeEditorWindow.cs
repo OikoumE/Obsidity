@@ -10,12 +10,17 @@ namespace Editor
 
         public void OnGUI()
         {
-            // Shows window content dependant on state
+            // Shows window content depending on state
             GUILayout.Label("Welcome to Obsidity", EditorStyles.boldLabel);
             if (!ObsidityMain.IsInitialized())
+            {
                 InitializeVault();
+            }
             else
+            {
                 VaultIsInitialized();
+                ObsiditySettings.DrawSettings();
+            }
         }
 
         /// <summary>

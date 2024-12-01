@@ -12,7 +12,9 @@ namespace Editor
         FullPath,
         VaultName,
         FileNameIndex,
-        ObsidityNotesFolder
+        ObsidityNotesFolder,
+        CapitalizeTitle,
+        LinkTitle
     }
 
     /// <summary>
@@ -25,6 +27,8 @@ namespace Editor
         public const string VaultNameKey = "ObsidityVaultName";
         public const string FileNameIndexKey = "FileNameIndex";
         public const string ObsidityNotesFolderKey = "ObsidityNotesFolder";
+        public const string CapitalizeTitleKey = "CapitalizeTitle";
+        public const string LinkTitleKey = "LinkTitle";
 
 
         private static string GetStringKeyFromEnum(ObsidityPlayerPrefsKeys key)
@@ -37,6 +41,8 @@ namespace Editor
                 ObsidityPlayerPrefsKeys.VaultName => VaultNameKey,
                 ObsidityPlayerPrefsKeys.FileNameIndex => FileNameIndexKey,
                 ObsidityPlayerPrefsKeys.ObsidityNotesFolder => ObsidityNotesFolderKey,
+                ObsidityPlayerPrefsKeys.CapitalizeTitle => CapitalizeTitleKey,
+                ObsidityPlayerPrefsKeys.LinkTitle => LinkTitleKey,
                 _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
             };
         }
@@ -50,6 +56,17 @@ namespace Editor
                 ObsidityLogger.Log("Resetting stores playerPrefs key: " + keyString);
                 PlayerPrefs.DeleteKey(keyString);
             }
+        }
+
+        internal static bool GetPrefAsBool(ObsidityPlayerPrefsKeys key)
+        {
+            return GetInt(key) == 1;
+        }
+
+        internal static void SetPrefAsBool(ObsidityPlayerPrefsKeys key, bool value)
+        {
+            var i = value ? 1 : 0;
+            SaveIntKey(key, i);
         }
 
         public static string GetString(ObsidityPlayerPrefsKeys key)

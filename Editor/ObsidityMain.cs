@@ -6,8 +6,44 @@ using UnityEngine;
 
 namespace Editor
 {
+    //TODO scan for existing .md's inside Assets/Obsidity/ to restore vaults/add multiple
+    //TODO add settings to intro window (editorFontSize, saveOnShiftReturn, etc)
+    //     also potential formatting options ([[Link]] all titles?, etc)
     public static class ObsidityMain
     {
+        /// <summary>
+        ///     Creates meta tag, appends title and content with (minor) formatting
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static string CreateString(ObsidityData data)
+        {
+            //TODO setting: toggle, capitalizeTitle 
+            //TODO setting: toggle, [[Link]] titles
+            var title = data.textTitle;
+            if (true) title = title.FirstCharToUpper(); //setting to add
+            return $"{CreateMetaString(data)}" +
+                   $"\n# [[{title}]]" +
+                   "\n---" +
+                   $"\n{data.textContent}" +
+                   "\n\n---";
+        }
+
+        /// <summary>
+        ///     space separated string with tags
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>string formatted according to meta field requirements of obsisidan</returns>
+        private static string CreateMetaString(ObsidityData data)
+        {
+            // space separated string with tags
+            const string pre = "---\ntags:";
+            var tags = data.textTags.Split(" ")
+                .Aggregate("", (current, tag) => current + $"\n - {tag}");
+            var post = $"Created: {data.textDate}\n---";
+            return pre + tags + post;
+        }
+
         /// <summary>
         ///     Save a markdown file to the Vault
         /// </summary>
@@ -28,9 +64,7 @@ namespace Editor
 
                 var fullFileNamePath = Path.Combine(vaultFullPath, fileName).Replace("\\", "/");
                 // assign meta+content
-                var stringData =
-                    $"---\ntags: {IterateTags(data)}\nCreated: {data.textDate}\n---\n# {data.textTitle}\n{data.textContent}\n";
-
+                var stringData = CreateString(data);
                 // write file
                 File.WriteAllText(fullFileNamePath, stringData);
 #if UNITY_EDITOR
@@ -46,16 +80,6 @@ namespace Editor
             }
         }
 
-        /// <summary>
-        ///     space separated string with tags
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns>string formatted according to meta field requirements of obsisidan</returns>
-        private static string IterateTags(ObsidityData data)
-        {
-            // space separated string with tags
-            return data.textTags.Split(" ").Aggregate("", (current, tag) => current + $"\n - {tag}");
-        }
 
         /// <summary>
         ///     checks if Obsidity is initialized

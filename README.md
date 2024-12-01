@@ -6,6 +6,7 @@ A tiny plugin that docks right in UnityEditor that allows you to take (Obsidian.
 
 ---
 
+
 ## Installation
 1. copy the repo-url (https://github.com/OikoumE/Obsidity.git)
 2. open unity package manager
@@ -28,7 +29,7 @@ If you want to use Obsidian.md to read the notes, simply open Obsidian, in the b
 navigate to '<your unity project path>/Assets/Obsidity/<Name of your vault>'. 
 
 
-<img src="https://github.com/user-attachments/assets/e7483e1a-b9b6-4036-88ef-5839d0e59b41" alt="image" width="200" />
+<img src="https://github.com/user-attachments/assets/6856b136-576b-47af-98d9-0165e0ebbf2b" alt="image" width="200" />
 
 <img src="https://github.com/user-attachments/assets/49db26e1-77e1-4bf5-8b5a-c0e4e24449c2" alt="image" width="200" />
 

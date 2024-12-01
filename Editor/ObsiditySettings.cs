@@ -10,11 +10,11 @@ namespace Editor
         private static bool _isFolded;
         private static bool _linkTitle;
         private static bool _capitalizeTitle;
-        private static readonly Dictionary<ObsidityPlayerPrefsKeys, bool> _obsiditySettingValues;
+        private static readonly Dictionary<ObsidityPlayerPrefsKeys, bool> ObsiditySettingValues;
 
         static ObsiditySettings()
         {
-            _obsiditySettingValues = new Dictionary<ObsidityPlayerPrefsKeys, bool>
+            ObsiditySettingValues = new Dictionary<ObsidityPlayerPrefsKeys, bool>
             {
                 {
                     ObsidityPlayerPrefsKeys.LinkTitle,
@@ -45,14 +45,14 @@ namespace Editor
             if (_isFolded)
             {
                 EditorGUI.indentLevel++;
-                foreach (var key in _obsiditySettingValues.Keys)
+                foreach (var key in ObsiditySettingValues.Keys)
                 {
                     var title = KeyToSettingString(key);
-                    var currVal = _obsiditySettingValues[key];
+                    var currVal = ObsiditySettingValues[key];
                     var newValue = ObsidityEditorHelper.DrawToggle(title, currVal);
                     if (currVal == newValue)
                         continue;
-                    _obsiditySettingValues[key] = newValue;
+                    ObsiditySettingValues[key] = newValue;
                     ObsidityPlayerPrefs.SetPrefAsBool(key, newValue);
                 }
             }

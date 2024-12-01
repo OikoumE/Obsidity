@@ -6,6 +6,7 @@ A tiny plugin that docks right in UnityEditor that allows you to take (Obsidian.
 
 ---
 
+
 ## Installation
 1. copy the repo-url (https://github.com/OikoumE/Obsidity.git)
 2. open unity package manager
@@ -20,7 +21,7 @@ The 'Obsidity Welcome' window should appear.
 When you initialize a Vault, the Intro window will close, and the editor window will appear in its place.
 
 
-<img src="https://github.com/user-attachments/assets/9e8eeb9f-798b-402f-afb8-b3c088f3dfef" alt="image" width="200" /><img src="https://github.com/user-attachments/assets/2692f86b-b0ce-4e1e-a934-80f544449091" alt="image" width="200" />
+<img src="https://github.com/user-attachments/assets/6856b136-576b-47af-98d9-0165e0ebbf2b" alt="image" width="200" /><img src="https://github.com/user-attachments/assets/2692f86b-b0ce-4e1e-a934-80f544449091" alt="image" width="200" />
 
 After initializing you can access the Obsidity Editor via 'Window>Obsidity>Obsidity Editor'.
 
@@ -61,8 +62,10 @@ OpenSauce
 ---
 
 ### Changelog:
-26/11:
+26/11/24:
   - ~~added export_unitypackage.yml workflow~~
   - changed from exporting unitypackage to importing github repo workflow
+01/12/24:
+  - added (multiple) settings and a few minor changes
   
 ---

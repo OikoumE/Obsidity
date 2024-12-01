@@ -47,7 +47,7 @@ namespace Editor
             const string pre = "---\ntags:";
             var tags = data.textTags.Split(" ")
                 .Aggregate("", (current, tag) => current + $"\n - {tag}");
-            var post = $"Created: {data.textDate}\n---";
+            var post = $"\nCreated: {data.textDate}\n---";
             return pre + tags + post;
         }
 

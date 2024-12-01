@@ -14,6 +14,7 @@ namespace Obsidity.Scripts.Editor
             },
             fontStyle = FontStyle.Bold
         };
+        
 
         public static GUIStyle ErrorStyle = new(GUI.skin.label)
         {

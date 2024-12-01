@@ -72,8 +72,8 @@ namespace Editor
             EditorGUILayout.HelpBox($"Vault Name: {vaultName}\nVault Location: {fullPath}", MessageType.Info);
 
             // info about where to open editor
-            var wordWrapStyle = new GUIStyle(GUI.skin.label);
-            wordWrapStyle.wordWrap = true;
+            var wordWrapStyle = new GUIStyle(GUI.skin.label)
+                { wordWrap = true };
             GUILayout.Label(ObsidityStrings.FindObsidityWindow, wordWrapStyle);
             GUILayout.Box(GUIContent.none, GUILayout.ExpandWidth(true), GUILayout.Height(1));
 

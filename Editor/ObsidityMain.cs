@@ -29,11 +29,33 @@ namespace Editor
             var doLink = ObsidityPlayerPrefs.GetPrefAsBool(ObsidityPlayerPrefsKeys.CapitalizeTitle);
             if (doLink) title = $"[[{title}]]";
 
+            var parseContent = ShouldParse();
+            var content = data.textContent;
+            if (parseContent) content = ParseContentString(data.textContent);
+
             return $"{CreateMetaString(data)}" +
                    $"\n# {title}" +
                    "\n---" +
-                   $"\n{data.textContent}" +
+                   $"\n{content}" +
                    "\n\n---";
+        }
+
+        private static bool ShouldParse()
+        {
+            return true;
+            //TODO set/get prefs (settings) 
+            //ObsidityPlayerPrefs.GetPrefAsBool(ObsidityPlayerPrefsKeys.CapitalizeTitle);
+        }
+
+        private static string ParseContentString(string dataTextContent)
+        {
+            //TODO settings: replaceTodoWithMetaTodo
+            dataTextContent = dataTextContent.Replace("//TODO", "\n- [ ] ");
+            dataTextContent = dataTextContent.Replace("//todo", "\n- [ ] ");
+            dataTextContent = dataTextContent.Replace("//Todo", "\n- [ ] ");
+
+
+            return dataTextContent;
         }
 
         /// <summary>

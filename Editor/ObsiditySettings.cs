@@ -75,7 +75,7 @@ namespace Editor
             if (_isExpanded)
             {
                 GUILayout.BeginVertical(EditorStyles.helpBox);
-                HandleAllKeys();
+                HandlePlayerPrefKeys();
                 GUILayout.EndVertical();
             }
 
@@ -83,10 +83,9 @@ namespace Editor
             GUILayout.EndVertical();
         }
 
-        private static void HandleAllKeys()
+        private static void HandlePlayerPrefKeys()
         {
             const int indentation = 15;
-
 
             foreach (var key in ObsidityIntValues.Keys.ToArray())
                 switch (key)

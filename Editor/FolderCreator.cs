@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Editor
 {
-    public static class FolderCreator
+    public static class ObsidityFolderCreator
     {
         private static void CreateFolder(string absoluteFolderPath)
         {

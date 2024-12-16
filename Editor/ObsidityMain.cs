@@ -184,7 +184,7 @@ namespace Editor
             {
                 //try to create folders and files
                 var vaultPath = Path.Combine(Application.dataPath, "Obsidity", vaultName).Replace("\\", "/");
-                FolderCreator.CreateVaultFolders(vaultName);
+                ObsidityFolderCreator.CreateVaultFolders(vaultName);
                 var readmeContent = $"New vault: {vaultName}\n";
                 File.WriteAllText(Path.Combine(vaultPath, "README.md"), readmeContent);
                 ObsidityLogger.Log($"Vault '{vaultName}' created successfully at: {vaultPath}");

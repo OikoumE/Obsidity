@@ -1,6 +1,6 @@
 {
   "name": "com.oikoume.obsidity",
-  "version": "1.0.2",
+  "version": "1.0.201",
   "displayName": "Obsidity",
   "description": "Obsidian.md + Unity = Obsidity: A tiny plugin that docks right in UnityEditor that allows you to take (Obsidian.md style markdown) notes easily and quickly.",
   "unity": "6000.0"

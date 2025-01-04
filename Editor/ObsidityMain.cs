@@ -97,7 +97,7 @@ namespace Editor
                 // write file
                 File.WriteAllText(fullFileNamePath, stringData);
 #if UNITY_EDITOR
-                // refresh project folder to immediatly show the new files/folders
+                // refresh project folder to immediately show the new files/folders
                 AssetDatabase.Refresh();
 #endif
                 return true;
